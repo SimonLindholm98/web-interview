@@ -12,17 +12,17 @@ const todoLists = {
   '1': {
     id: '1',
     title: 'First List',
-    todos: ['First todo of first list!'],
+    todos: [{text:'First todo of first list!', completed: false}],
   },
   '2': {
     id: '2',
     title: 'Second List',
-    todos: ['First todo of second list!'],
+    todos: [{text:'First todo of second list!', completed: false}],
   },
   '3': {
     id: '3',
     title: 'Third List',
-    todos: ['First todo of third list!'],
+    todos: [{text:'First todo of third list!', completed: false}],
   },
 }
 
