@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import { TextField, Card, CardContent, CardActions, Button, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
@@ -6,19 +6,15 @@ import AddIcon from '@mui/icons-material/Add'
 export const TodoListForm = ({ todoList, saveTodoList }) => {
   const [todos, setTodos] = useState(todoList.todos)
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  //Additional tasks 1 autosave
+  useEffect(() => {
     saveTodoList(todoList.id, { todos })
-  }
+  }, [todos, saveTodoList, todoList.id])
 
   return (
     <Card sx={{ margin: '0 1rem' }}>
       <CardContent>
         <Typography component='h2'>{todoList.title}</Typography>
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
-        >
           {todos.map((name, index) => (
             <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
               <Typography sx={{ margin: '8px' }} variant='h6'>
@@ -63,11 +59,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
             >
               Add Todo <AddIcon />
             </Button>
-            <Button type='submit' variant='contained' color='primary'>
-              Save
-            </Button>
           </CardActions>
-        </form>
       </CardContent>
     </Card>
   )
