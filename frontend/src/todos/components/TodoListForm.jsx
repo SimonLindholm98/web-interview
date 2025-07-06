@@ -36,7 +36,7 @@ export const TodoListForm = ({ todoList, saveTodoList }) => {
                   setTodos([
                     // immutable update
                     ...todos.slice(0, index),
-                    event.target.value,
+                    { ...todo, text: event.target.value },
                     ...todos.slice(index + 1),
                   ])
                 }}
