@@ -8,6 +8,32 @@ app.use(express.json())
 
 const PORT = 3001
 
-app.get('/', (req, res) => res.send('Hello World!'))
+const todoLists = {
+  '1': {
+    id: '1',
+    title: 'First List',
+    todos: ['First todo of first list!'],
+  },
+  '2': {
+    id: '2',
+    title: 'Second List',
+    todos: ['First todo of second list!'],
+  },
+  '3': {
+    id: '3',
+    title: 'Third List',
+    todos: ['First todo of third list!'],
+  },
+}
+
+app.get('/', (req, res) => res.json(todoLists))
+
+app.post('/todolists/:id', (req, res) => {
+  const { id } = req.params
+  const { todos } = req.body
+  if (!todoLists[id]) return res.status(404).json({ error: `List with ${id} not found` })
+  todoLists[id].todos = todos
+  res.json(todoLists[id])
+})
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
